@@ -22,6 +22,26 @@ public class BlockBase extends Block
     private final boolean noDrops;
     private final boolean isLiquid;
 
+    public BlockBase(float hardness, float resistance, SoundType soundType)
+    {
+        super(BlockBehaviour.Properties.of()
+                .strength(hardness, resistance)
+                .sound(soundType)
+                .requiresCorrectToolForDrops()
+        );
+
+        this.blockName = null;
+        this.hardness = hardness;
+        this.resistance = resistance;
+        this.soundType = soundType;
+        this.className = null;
+        this.mapColor = null;
+        this.dyeColor = null;
+        this.lightLevel = null;
+        this.noDrops = false;
+        this.isLiquid = false;
+    }
+
 
     BlockBase(String blockName, float hardness, float resistance, SoundType soundType, Class<? extends BlockBase> className)
     {
