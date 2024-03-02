@@ -26,12 +26,12 @@ public class ModTags
     {
         private static TagKey<Item>tag(String name)
         {
-            return ItemTags.create(ModUtil.modLocation(ModUtil.MOD_ID, name));
+            return ItemTags.create(StringHelper.modLocation(ModUtil.MOD_ID, name));
         }
     }
 
     private static TagKey<Item> forgeTag(String name)
     {
-        return ItemTags.create(ModUtil.forgeLocation(name));
+        return ItemTags.create(StringHelper.forgeLocation(name));
     }
 }
