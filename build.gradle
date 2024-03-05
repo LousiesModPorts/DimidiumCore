@@ -58,6 +58,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
+
+
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
             minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
@@ -72,6 +74,17 @@ tasks.named('processResources', ProcessResources).configure {
         expand replaceProperties + [project: project]
     }
 }
+
+java.withSourcesJar()
+java.withJavadocJar()
+
+task deobfJar(type: Jar) { // Generate deobfuscated
+    from sourceSets.main.output
+
+    archiveClassifier = 'deobf'
+}
+
+task sourceJa
 
 tasks.named('jar', Jar).configure {
     manifest {
@@ -95,6 +108,10 @@ tasks.named('publish').configure {
 }
 */
 
+artifacts {
+    archives deobfJar
+}
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
@@ -111,3 +128,4 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
