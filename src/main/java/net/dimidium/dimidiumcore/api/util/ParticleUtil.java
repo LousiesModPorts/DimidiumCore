@@ -2,7 +2,7 @@ package net.dimidium.dimidiumcore.api.util;
 
 public class ParticleUtil
 {
-    private static long MakeRgb(byte red, byte green, byte blue)
+    public static long MakeRgb(byte red, byte green, byte blue)
     {
         return ((red*0x10000) + (green*0x100) + blue);
     }
