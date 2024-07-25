@@ -1,5 +1,6 @@
 package net.dimidium.dimidiumcore.api.item;
 
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -22,6 +23,11 @@ public class ItemBase extends Item
         this.canEnchantTable = canEnchantTable;
         this.canBookEnchant = canBookEnchant;
         this.isVisible = isVisible;
+    }
+
+    public void addToMainCreativeTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output)
+    {
+        output.accept(this);
     }
 
     @Override

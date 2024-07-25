@@ -4,10 +4,12 @@ package net.dimidium.dimidiumcore.api.item;
 import net.dimidium.dimidiumcore.api.energy.EnergyAction;
 import net.dimidium.dimidiumcore.api.energy.item.EnergyItemCapability;
 import net.dimidium.dimidiumcore.api.energy.item.IItemFEStorage;
+import net.dimidium.dimidiumcore.api.util.ComponentUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -32,25 +34,28 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
         this.feCapacity = feCapacity;
     }
 
-    //todo below
-
-    /*@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> lines, TooltipFlag advancedTooltips)
     {
-        CompoundTag tag = stack.getTag();
-        double currentFE = 0.0D;
+        double currentFE = getCurrentFE(stack);
         double maxFE = getMaxFE(stack);
 
-        if (tag != null)
-        {
-            currentFE = tag.getDouble("currentFE");
-        }
 
         lines.add(Component.literal("" + currentFE + "/" + maxFE + "FE").withStyle(ChatFormatting.DARK_AQUA));
-    }*/
+    }
 
-    /*@Override
+    @Override
+    public void addToMainCreativeTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output)
+    {
+        super.addToMainCreativeTab(parameters, output);
+
+        var chargedItem = new ItemStack(this, 1);
+        inputFE(chargedItem, getMaxFE(chargedItem), EnergyAction.EXECUTE);
+        output.accept(chargedItem);
+    }
+
+    @Override
     public int getBarWidth(ItemStack stack)
     {
         double filled = getCurrentFE(stack) / getMaxFE(stack);
@@ -96,14 +101,7 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
 
     public double getMaxFE(ItemStack stack)
     {
-        CompoundTag tag = stack.getTag();
-
-        if (tag != null && tag.contains("maxFE", 6))
-        {
-            return tag.getDouble("maxFE");
-        }
-
-        return this.feCapacity;
+        return stack.getOrDefault(ComponentUtil.ENERGY_CAPACITY, feCapacity);
     }
 
     protected final void setMaxFE(ItemStack stack, double maxPower)
@@ -112,13 +110,12 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
 
         if (Math.abs(maxPower - defaultCapacity) < 1.0E-4D)
         {
-            stack.remove.removeTagKey("maxFE");
-            maxPower = defaultCapacity;
+            stack.remove(ComponentUtil.ENERGY_CAPACITY);
         }
 
         else
         {
-            stack.getOrCreateTag().putDouble("maxFE", maxPower);
+            stack.set(ComponentUtil.ENERGY_CAPACITY, maxPower);
         }
 
         double currentPower = getCurrentFE(stack);
@@ -132,27 +129,19 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
     @Override
     public double getCurrentFE(ItemStack is)
     {
-        CompoundTag tag = is.getTag();
-        if (tag != null)
-            return tag.getDouble("currentFE");
-        return 0.0D;
+        return is.getOrDefault(ComponentUtil.STORED_ENERGY, 0.0);
     }
 
     protected final void setCurrentFE(ItemStack stack, double power)
     {
         if (power < 1.0E-4D)
         {
-            stack.removeTagKey("currentFE");
+            stack.remove(ComponentUtil.STORED_ENERGY);
         }
 
         else
         {
-            stack.getOrCreateTag().putDouble("currentFE", power);
+            stack.set(ComponentUtil.STORED_ENERGY, power);
         }
     }
-
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt)
-    {
-        return new EnergyItemCapability(stack, this);
-    }*/
 }
