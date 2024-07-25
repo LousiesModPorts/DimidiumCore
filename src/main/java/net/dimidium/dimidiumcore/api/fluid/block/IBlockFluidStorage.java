@@ -1,7 +1,7 @@
 package net.dimidium.dimidiumcore.api.fluid.block;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public interface IBlockFluidStorage
 {
@@ -16,4 +16,6 @@ public interface IBlockFluidStorage
     double getMaxInput(ItemStack paramItemStack);
 
     double getMaxOutput(ItemStack paramItemStack);
+
+    double extractFluid(ItemStack is, int maxOutput, IFluidHandler.FluidAction fluidAction);
 }

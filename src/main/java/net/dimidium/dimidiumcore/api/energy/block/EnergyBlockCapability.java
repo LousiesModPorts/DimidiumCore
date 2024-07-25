@@ -1,17 +1,10 @@
 package net.dimidium.dimidiumcore.api.energy.block;
 
-import net.dimidium.dimidiumcore.api.capabilities.Capabilities;
 import net.dimidium.dimidiumcore.api.energy.EnergyAction;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
-import javax.annotation.Nullable;
-
-public class EnergyBlockCapability implements ICapabilityProvider, IEnergyStorage
+public class EnergyBlockCapability implements IEnergyStorage
 {
     private final ItemStack is;
 
@@ -21,18 +14,6 @@ public class EnergyBlockCapability implements ICapabilityProvider, IEnergyStorag
     {
         this.is = is;
         this.block = block;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing)
-    {
-        if (capability == Capabilities.FORGE_ENERGY)
-        {
-            return (LazyOptional<T>) LazyOptional.of(() -> this);
-        }
-
-        return LazyOptional.empty();
     }
 
     @Override

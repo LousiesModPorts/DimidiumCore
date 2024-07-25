@@ -11,9 +11,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -33,9 +32,11 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
         this.feCapacity = feCapacity;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    //todo below
+
+    /*@OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> lines, TooltipFlag advancedTooltips)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> lines, TooltipFlag advancedTooltips)
     {
         CompoundTag tag = stack.getTag();
         double currentFE = 0.0D;
@@ -46,10 +47,10 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
             currentFE = tag.getDouble("currentFE");
         }
 
-        lines.add(Component.literal("" + currentFE + "/" + currentFE + "FE").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD));
-    }
+        lines.add(Component.literal("" + currentFE + "/" + maxFE + "FE").withStyle(ChatFormatting.DARK_AQUA));
+    }*/
 
-    @Override
+    /*@Override
     public int getBarWidth(ItemStack stack)
     {
         double filled = getCurrentFE(stack) / getMaxFE(stack);
@@ -111,7 +112,7 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
 
         if (Math.abs(maxPower - defaultCapacity) < 1.0E-4D)
         {
-            stack.removeTagKey("maxFE");
+            stack.remove.removeTagKey("maxFE");
             maxPower = defaultCapacity;
         }
 
@@ -153,5 +154,5 @@ public abstract class EnergyItemBase extends ItemBase implements IItemFEStorage
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt)
     {
         return new EnergyItemCapability(stack, this);
-    }
+    }*/
 }

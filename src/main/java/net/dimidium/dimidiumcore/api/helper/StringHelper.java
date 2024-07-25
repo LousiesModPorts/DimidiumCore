@@ -7,23 +7,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class StringHelper
 {
     public static ResourceLocation location(String modId)
     {
-        return new ResourceLocation(modId);
+        return ResourceLocation.parse(modId);
     }
 
     public static ResourceLocation modLocation(String modId, String path)
     {
-        return new ResourceLocation(modId, path);
+        return ResourceLocation.fromNamespaceAndPath(modId, path);
     }
 
     public static ResourceLocation forgeLocation(String path)
     {
-        return new ResourceLocation("forge", path);
+        return ResourceLocation.fromNamespaceAndPath("forge", path);
     }
 
     public static MutableComponent getFluidName(FluidStack stack)
@@ -40,7 +40,9 @@ public class StringHelper
         return name;
     }
 
-    public static MutableComponent getItemName(ItemStack stack)
+    //todo below
+
+   /* public static MutableComponent getItemName(ItemStack stack)
     {
 
         Item item = stack.getItem();
@@ -55,7 +57,7 @@ public class StringHelper
 
         return name;
     }
-
+*/
     public static String[] decompose(String resourceLoc, char delimiter)
     {
         return decompose("minecraft", resourceLoc, delimiter);

@@ -1,6 +1,6 @@
 package net.dimidium.dimidiumcore.api.energy;
 
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public enum EnergyAction
 {

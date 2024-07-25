@@ -30,11 +30,14 @@ public class ItemBase extends Item
         return canEnchant;
     }
 
-    @Override
+
+    //todo below
+
+    /*@Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
     {
         return canEnchantTable;
-    }
+    }*/
 
     @Override
     public boolean isBookEnchantable(ItemStack itemstack1, ItemStack itemstack2)

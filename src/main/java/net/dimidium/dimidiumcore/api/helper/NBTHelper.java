@@ -5,7 +5,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class NBTHelper
 {
-    public static CompoundTag getTag(ItemStack stack)
+
+    //todo below
+/*    public static CompoundTag getTag(ItemStack stack)
     {
         if (!stack.hasTag())
         {
@@ -18,5 +20,5 @@ public class NBTHelper
     public static boolean hasTag(ItemStack stack)
     {
         return stack.hasTag();
-    }
+    }*/
 }

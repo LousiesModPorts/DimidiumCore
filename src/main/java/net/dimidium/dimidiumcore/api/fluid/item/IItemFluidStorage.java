@@ -1,9 +1,7 @@
 package net.dimidium.dimidiumcore.api.fluid.item;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public interface IItemFluidStorage
 {

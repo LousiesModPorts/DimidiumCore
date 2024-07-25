@@ -1,19 +1,13 @@
 package net.dimidium.dimidiumcore.api.fluid.item;
 
-import net.dimidium.dimidiumcore.api.capabilities.Capabilities;
 import net.dimidium.dimidiumcore.api.fluid.block.IBlockFluidStorage;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class FluidItemCapability implements ICapabilityProvider, IFluidTank
+public class FluidItemCapability implements IFluidTank
 {
     private final FluidStack fluidStack;
     private final ItemStack is;
@@ -29,18 +23,6 @@ public class FluidItemCapability implements ICapabilityProvider, IFluidTank
         this.block = block;
         this.maxInput = maxInput;
         this.maxOutput = maxOutput;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction direction)
-    {
-        if(capability == Capabilities.FLUID_BLOCK)
-        {
-            return (LazyOptional<T>) LazyOptional.of(() -> this);
-        }
-
-        return LazyOptional.empty();
     }
 
     @Override

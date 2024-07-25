@@ -1,23 +1,14 @@
 package net.dimidium.dimidiumcore.api.fluid.block;
 
-import net.dimidium.dimidiumcore.api.capabilities.Capabilities;
-import net.dimidium.dimidiumcore.api.energy.EnergyAction;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Predicate;
-
-public class FluidBlockCapability implements ICapabilityProvider, IFluidTank
+public class FluidBlockCapability implements IFluidTank
 {
     //TODO min input and output of tanks
 
@@ -35,18 +26,6 @@ public class FluidBlockCapability implements ICapabilityProvider, IFluidTank
         this.block = block;
         this.maxInput = maxInput;
         this.maxOutput = maxOutput;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction direction)
-    {
-        if(capability == Capabilities.FLUID_BLOCK)
-        {
-            return (LazyOptional<T>) LazyOptional.of(() -> this);
-        }
-
-        return LazyOptional.empty();
     }
 
     @Override
